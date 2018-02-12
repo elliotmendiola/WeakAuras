@@ -8,5 +8,6 @@ Very little of the useage/interface should be changed from the legitimate versio
 
 ## Credits - WeakAuras and Resources used to emulate updates that were added to the wow api
 
-Numielle [https://github.com/Numielle] for ActionButtonGlow
 Mirrored for WeakAuras
+
+Numielle [https://github.com/Numielle] for ActionButtonGlow
