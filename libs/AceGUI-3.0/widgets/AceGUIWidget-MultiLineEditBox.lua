@@ -89,11 +89,13 @@ local function OnSizeChanged(self, width, height)                               
 	self.obj.editBox:SetWidth(width)
 end
 
-local function OnTextChanged(self, userInput)                                    -- EditBox
-	if userInput then
-		self = self.obj
-		self:Fire("OnTextChanged", self.editBox:GetText())
-		self.button:Enable()
+local function OnTextChanged(self)                                    -- EditBox
+	local self = this.obj
+	local value = this:GetText()
+	if value ~= self.lasttext then
+		self:Fire("OnTextChanged",value)
+		self.lasttext = value
+		self.button:Enable();
 	end
 end
 
@@ -173,7 +175,10 @@ local methods = {
 	end,
 
 	["SetText"] = function(self, text)
-		self.editBox:SetText(text)
+		self.lasttext = text or ""
+		self.editBox:SetText(text or "")
+		self.editBox:SetCursorPosition(0)
+		self.button:Disable();
 	end,
 
 	["SetMaxLetters"] = function (self, num)

@@ -801,7 +801,7 @@ local function modify(parent, region, data)
     -- Update text font
     text:SetFont(SharedMedia:Fetch("font", data.textFont), data.textSize, data.textFlags and data.textFlags ~= "None" and data.textFlags);
     text:SetTextColor(data.textColor[1], data.textColor[2], data.textColor[3], data.textColor[4]);
-    text:SetWordWrap(false);
+    -- text:SetWordWrap(false);
     animRotate(text, textDegrees);
     
         timer:Show();
