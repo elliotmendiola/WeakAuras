@@ -1,6 +1,9 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="libs\Backport\Backport.lua"/>
 	<Script file="libs\LibStub\LibStub.lua"/>
+	<Include file="libs\DRData-1.0\DRData-1.0.xml"/>
+	<Include file="libs\LibSimpleOptions-1.0\lib.xml"/>
+	<Include file="libs\BuffLib\BuffLib.xml"/>
+	<Script file="libs\Backport\Backport.lua"/>
 	<Include file="libs\CallbackHandler-1.0\CallbackHandler-1.0.xml"/>
 	<Include file="libs\LibChatAnims\LibChatAnims.xml"/>
 	<Include file="libs\AceGUI-3.0\AceGUI-3.0.xml"/>

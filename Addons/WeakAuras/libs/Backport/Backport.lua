@@ -1,61 +1,9 @@
 local Backport = {};
 Backport.frame = CreateFrame("frame");
-local eventHandlers = {};
-local scriptHandlers = {};
-local eventQueue = {};
 
 function wipe (tab)
   for k,v in pairs(tab) do tab[k]=nil end
   return tab;
-end
-
-function Backport:RegisterEvent (event, fn)
-  if (not eventHandlers[event]) then
-    eventHandlers[event] = {};
-    Backport.frame:RegisterEvent(event);
-  end
-  table.insert(eventHandlers[event], fn);
-end
-
-function Backport:RegisterScript(script, fn)
-  if (script ~= "OnUpdate") then
-    if (not scriptHandlers[script]) then
-      scriptHandlers[script] = {};
-      Backport.frame:SetScript(script, function (arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20)
-        for k,v in pairs(scriptHandlers[script]) do
-          table.insert(eventQueue, {
-            ["handler"] = v,
-            ["arguments"] = {
-              ["arg1"] = arg1,
-              ["arg2"] = arg2,
-              ["arg3"] = arg3,
-              ["arg4"] = arg4,
-              ["arg5"] = arg5,
-              ["arg6"] = arg6,
-              ["arg7"] = arg7,
-              ["arg8"] = arg8,
-              ["arg9"] = arg9,
-              ["arg10"] = arg10,
-              ["arg11"] = arg11,
-              ["arg12"] = arg12,
-              ["arg13"] = arg13,
-              ["arg14"] = arg14,
-              ["arg15"] = arg15,
-              ["arg16"] = arg16,
-              ["arg17"] = arg17,
-              ["arg18"] = arg18,
-              ["arg19"] = arg19,
-              ["arg20"] = arg20
-            }
-          })
-        end
-      end)
-    end
-
-    table.insert(scriptHandlers[script], fn);
-  else
-    print("OnUpdate can not be scripted with this backport");
-  end
 end
 
 function print (arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20)
@@ -153,10 +101,6 @@ function UnitAura (unit, indexOrName, rank, filter)
   return nil;
 end
 
-Backport:RegisterEvent("SPELLCAST_SUCCEEDED", function (arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20)
-  print(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20)
-end);
-
 Backport.frame:SetScript("OnEvent", function (self, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20)
   if (eventHandlers[event]) then
     for i,v in ipairs(eventHandlers[event]) do
@@ -186,12 +130,5 @@ Backport.frame:SetScript("OnEvent", function (self, event, arg1, arg2, arg3, arg
         }
       })
     end
-  end
-end)
-
-Backport.frame:SetScript("OnUpdate", function ()
-  local script = table.remove(eventQueue, 1);
-  if (script) then
-    script.handler(script.arguments.arg1, script.arguments.arg2, script.arguments.arg3, script.arguments.arg4, script.arguments.arg5, script.arguments.arg6, script.arguments.arg7, script.arguments.arg8, script.arguments.arg9, script.arguments.arg10, script.arguments.arg11, script.arguments.arg12, script.arguments.arg13, script.arguments.arg14, script.arguments.arg15, script.arguments.arg16, script.arguments.arg17, script.arguments.arg18, script.arguments.arg19, script.arguments.arg20)
   end
 end)

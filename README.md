@@ -15,3 +15,5 @@ Please explain exactly what happened, the more information the better.  If you c
 Mirrored for WeakAuras
 
 Numielle [https://github.com/Numielle] for ActionButtonGlow
+
+Schaka [https://www.reddit.com/r/wowservers/comments/4e9yy1/tbc_bufflib_an_addon_to_share_spell_timers] for BuffLib
