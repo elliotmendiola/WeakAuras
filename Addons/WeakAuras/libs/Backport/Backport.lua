@@ -87,7 +87,7 @@ function UnitAura (unit, indexOrName, rank, filter)
   end
 
   if (debuffType == "HARMFUL" or debuffType == nil) then
-    local name, r, icon, count, duration, expirationTime = UnitDebuff(unit, 1, newfilter);
+    local name, r, icon, count, _, duration, expirationTime = UnitDebuff(unit, 1, newfilter);
     x = 1;
     while (name ~= nil) do
       if (name == indexOrName and (rank == nil or string.find(rank, "HARMFUL") or string.find(rank, "HELPFUL") or rank == r)) then
