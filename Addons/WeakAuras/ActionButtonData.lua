@@ -125,5 +125,5 @@ function ABD_MainStanceBars(profile)
 end
 
 function ABD_SlotNumber(slotId)
-	return math.mod(slotId - 1, 12) + 1;
+	return math.fmod(slotId - 1, 12) + 1;
 end

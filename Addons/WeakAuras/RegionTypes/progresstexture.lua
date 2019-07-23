@@ -409,6 +409,10 @@ local function modify(parent, region, data)
     end
     
     function region:SetDurationInfo(duration, expirationTime, customValue, inverse)
+        if(duration == nil) then
+            duration = 0
+        end
+
         if(duration <= 0.01 or duration > region.duration or not data.stickyDuration) then
             region.duration = duration;
         end
